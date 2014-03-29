@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2EFE2F7318E65128003CBAFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F7218E65128003CBAFD /* Foundation.framework */; };
+		2EFE2F8118E65128003CBAFD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F8018E65128003CBAFD /* XCTest.framework */; };
+		2EFE2F8218E65128003CBAFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F7218E65128003CBAFD /* Foundation.framework */; };
+		2EFE2F8418E65128003CBAFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F8318E65128003CBAFD /* UIKit.framework */; };
+		2EFE2F8718E65128003CBAFD /* libCGSyncController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F6F18E65128003CBAFD /* libCGSyncController.a */; };
+		2EFE2F8D18E65128003CBAFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2EFE2F8B18E65128003CBAFD /* InfoPlist.strings */; };
+		2EFE2F8F18E65128003CBAFD /* CGSyncControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F8E18E65128003CBAFD /* CGSyncControllerTests.m */; };
+		2EFE2FA118E65326003CBAFD /* CGManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F9B18E65326003CBAFD /* CGManagedObject.m */; };
+		2EFE2FA218E65326003CBAFD /* CGSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F9D18E65326003CBAFD /* CGSyncController.m */; };
+		2EFE2FA318E65326003CBAFD /* NSManagedObject+SYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F9F18E65326003CBAFD /* NSManagedObject+SYNC.m */; };
+		2EFE2FA518E6535B003CBAFD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2FA418E6535B003CBAFD /* CoreData.framework */; };
+		2EFE2FA718E65374003CBAFD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2FA618E65374003CBAFD /* Parse.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2EFE2F8518E65128003CBAFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EFE2F6718E65127003CBAFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EFE2F6E18E65128003CBAFD;
+			remoteInfo = CGSyncController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2EFE2F6D18E65128003CBAFD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2EFE2F6F18E65128003CBAFD /* libCGSyncController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCGSyncController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EFE2F7218E65128003CBAFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2EFE2F7618E65128003CBAFD /* CGSyncController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CGSyncController-Prefix.pch"; sourceTree = "<group>"; };
+		2EFE2F7F18E65128003CBAFD /* CGSyncControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CGSyncControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EFE2F8018E65128003CBAFD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2EFE2F8318E65128003CBAFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		2EFE2F8A18E65128003CBAFD /* CGSyncControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CGSyncControllerTests-Info.plist"; sourceTree = "<group>"; };
+		2EFE2F8C18E65128003CBAFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2EFE2F8E18E65128003CBAFD /* CGSyncControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGSyncControllerTests.m; sourceTree = "<group>"; };
+		2EFE2F9A18E65326003CBAFD /* CGManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGManagedObject.h; sourceTree = "<group>"; };
+		2EFE2F9B18E65326003CBAFD /* CGManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGManagedObject.m; sourceTree = "<group>"; };
+		2EFE2F9C18E65326003CBAFD /* CGSyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSyncController.h; sourceTree = "<group>"; };
+		2EFE2F9D18E65326003CBAFD /* CGSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSyncController.m; sourceTree = "<group>"; };
+		2EFE2F9E18E65326003CBAFD /* NSManagedObject+SYNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+SYNC.h"; sourceTree = "<group>"; };
+		2EFE2F9F18E65326003CBAFD /* NSManagedObject+SYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+SYNC.m"; sourceTree = "<group>"; };
+		2EFE2FA418E6535B003CBAFD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2EFE2FA618E65374003CBAFD /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../../../Documents/FacebookSDK/Parse.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EFE2F6C18E65128003CBAFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EFE2FA718E65374003CBAFD /* Parse.framework in Frameworks */,
+				2EFE2FA518E6535B003CBAFD /* CoreData.framework in Frameworks */,
+				2EFE2F7318E65128003CBAFD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EFE2F7C18E65128003CBAFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EFE2F8118E65128003CBAFD /* XCTest.framework in Frameworks */,
+				2EFE2F8418E65128003CBAFD /* UIKit.framework in Frameworks */,
+				2EFE2F8718E65128003CBAFD /* libCGSyncController.a in Frameworks */,
+				2EFE2F8218E65128003CBAFD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2EFE2F6618E65127003CBAFD = {
+			isa = PBXGroup;
+			children = (
+				2EFE2F7418E65128003CBAFD /* CGSyncController */,
+				2EFE2F8818E65128003CBAFD /* CGSyncControllerTests */,
+				2EFE2F7118E65128003CBAFD /* Frameworks */,
+				2EFE2F7018E65128003CBAFD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2EFE2F7018E65128003CBAFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EFE2F6F18E65128003CBAFD /* libCGSyncController.a */,
+				2EFE2F7F18E65128003CBAFD /* CGSyncControllerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2EFE2F7118E65128003CBAFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2EFE2FA618E65374003CBAFD /* Parse.framework */,
+				2EFE2FA418E6535B003CBAFD /* CoreData.framework */,
+				2EFE2F7218E65128003CBAFD /* Foundation.framework */,
+				2EFE2F8018E65128003CBAFD /* XCTest.framework */,
+				2EFE2F8318E65128003CBAFD /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2EFE2F7418E65128003CBAFD /* CGSyncController */ = {
+			isa = PBXGroup;
+			children = (
+				2EFE2F9C18E65326003CBAFD /* CGSyncController.h */,
+				2EFE2F9D18E65326003CBAFD /* CGSyncController.m */,
+				2EFE2F9A18E65326003CBAFD /* CGManagedObject.h */,
+				2EFE2F9B18E65326003CBAFD /* CGManagedObject.m */,
+				2EFE2F9E18E65326003CBAFD /* NSManagedObject+SYNC.h */,
+				2EFE2F9F18E65326003CBAFD /* NSManagedObject+SYNC.m */,
+				2EFE2F7518E65128003CBAFD /* Supporting Files */,
+			);
+			path = CGSyncController;
+			sourceTree = "<group>";
+		};
+		2EFE2F7518E65128003CBAFD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2EFE2F7618E65128003CBAFD /* CGSyncController-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2EFE2F8818E65128003CBAFD /* CGSyncControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2EFE2F8E18E65128003CBAFD /* CGSyncControllerTests.m */,
+				2EFE2F8918E65128003CBAFD /* Supporting Files */,
+			);
+			path = CGSyncControllerTests;
+			sourceTree = "<group>";
+		};
+		2EFE2F8918E65128003CBAFD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2EFE2F8A18E65128003CBAFD /* CGSyncControllerTests-Info.plist */,
+				2EFE2F8B18E65128003CBAFD /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EFE2F6E18E65128003CBAFD /* CGSyncController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EFE2F9218E65128003CBAFD /* Build configuration list for PBXNativeTarget "CGSyncController" */;
+			buildPhases = (
+				2EFE2F6B18E65128003CBAFD /* Sources */,
+				2EFE2F6C18E65128003CBAFD /* Frameworks */,
+				2EFE2F6D18E65128003CBAFD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CGSyncController;
+			productName = CGSyncController;
+			productReference = 2EFE2F6F18E65128003CBAFD /* libCGSyncController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		2EFE2F7E18E65128003CBAFD /* CGSyncControllerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EFE2F9518E65128003CBAFD /* Build configuration list for PBXNativeTarget "CGSyncControllerTests" */;
+			buildPhases = (
+				2EFE2F7B18E65128003CBAFD /* Sources */,
+				2EFE2F7C18E65128003CBAFD /* Frameworks */,
+				2EFE2F7D18E65128003CBAFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EFE2F8618E65128003CBAFD /* PBXTargetDependency */,
+			);
+			name = CGSyncControllerTests;
+			productName = CGSyncControllerTests;
+			productReference = 2EFE2F7F18E65128003CBAFD /* CGSyncControllerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EFE2F6718E65127003CBAFD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Revision Works, LLC";
+			};
+			buildConfigurationList = 2EFE2F6A18E65127003CBAFD /* Build configuration list for PBXProject "CGSyncController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2EFE2F6618E65127003CBAFD;
+			productRefGroup = 2EFE2F7018E65128003CBAFD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EFE2F6E18E65128003CBAFD /* CGSyncController */,
+				2EFE2F7E18E65128003CBAFD /* CGSyncControllerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EFE2F7D18E65128003CBAFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EFE2F8D18E65128003CBAFD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EFE2F6B18E65128003CBAFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EFE2FA118E65326003CBAFD /* CGManagedObject.m in Sources */,
+				2EFE2FA218E65326003CBAFD /* CGSyncController.m in Sources */,
+				2EFE2FA318E65326003CBAFD /* NSManagedObject+SYNC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EFE2F7B18E65128003CBAFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EFE2F8F18E65128003CBAFD /* CGSyncControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2EFE2F8618E65128003CBAFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EFE2F6E18E65128003CBAFD /* CGSyncController */;
+			targetProxy = 2EFE2F8518E65128003CBAFD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2EFE2F8B18E65128003CBAFD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EFE2F8C18E65128003CBAFD /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2EFE2F9018E65128003CBAFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2EFE2F9118E65128003CBAFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2EFE2F9318E65128003CBAFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/CGSyncController.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/nbvikingsidiot001/Documents/FacebookSDK,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CGSyncController/CGSyncController-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"../**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		2EFE2F9418E65128003CBAFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/CGSyncController.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/nbvikingsidiot001/Documents/FacebookSDK,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CGSyncController/CGSyncController-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"../**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		2EFE2F9618E65128003CBAFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CGSyncController/CGSyncController-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "CGSyncControllerTests/CGSyncControllerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		2EFE2F9718E65128003CBAFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CGSyncController/CGSyncController-Prefix.pch";
+				INFOPLIST_FILE = "CGSyncControllerTests/CGSyncControllerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EFE2F6A18E65127003CBAFD /* Build configuration list for PBXProject "CGSyncController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EFE2F9018E65128003CBAFD /* Debug */,
+				2EFE2F9118E65128003CBAFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EFE2F9218E65128003CBAFD /* Build configuration list for PBXNativeTarget "CGSyncController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EFE2F9318E65128003CBAFD /* Debug */,
+				2EFE2F9418E65128003CBAFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EFE2F9518E65128003CBAFD /* Build configuration list for PBXNativeTarget "CGSyncControllerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EFE2F9618E65128003CBAFD /* Debug */,
+				2EFE2F9718E65128003CBAFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2EFE2F6718E65127003CBAFD /* Project object */;
+}
