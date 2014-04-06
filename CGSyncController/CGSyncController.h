@@ -10,10 +10,11 @@
 #import <Foundation/Foundation.h>
 #import "CGObject.h"
 #import "CGDataController.h"
+#import "CGConnectionController.h"
 
 @interface CGSyncController : CGObject
 
-+ (CGSyncController *)sharedController;
++ (instancetype)sharedSync;
 
 - (void)startRefreshForClass:(NSString *)aClass;
 

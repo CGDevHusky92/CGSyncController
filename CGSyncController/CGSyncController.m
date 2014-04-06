@@ -36,7 +36,7 @@
 
 @implementation CGSyncController
 
-+ (CGSyncController *)sharedController
++ (instancetype)sharedSync
 {
     static CGSyncController *sharedController = nil;
     static dispatch_once_t onceToken;

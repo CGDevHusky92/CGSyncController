@@ -14,9 +14,7 @@
 		2EFE2F8718E65128003CBAFD /* libCGSyncController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F6F18E65128003CBAFD /* libCGSyncController.a */; };
 		2EFE2F8D18E65128003CBAFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2EFE2F8B18E65128003CBAFD /* InfoPlist.strings */; };
 		2EFE2F8F18E65128003CBAFD /* CGSyncControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F8E18E65128003CBAFD /* CGSyncControllerTests.m */; };
-		2EFE2FA118E65326003CBAFD /* CGManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F9B18E65326003CBAFD /* CGManagedObject.m */; };
 		2EFE2FA218E65326003CBAFD /* CGSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F9D18E65326003CBAFD /* CGSyncController.m */; };
-		2EFE2FA318E65326003CBAFD /* NSManagedObject+SYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F9F18E65326003CBAFD /* NSManagedObject+SYNC.m */; };
 		2EFE2FA518E6535B003CBAFD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2FA418E6535B003CBAFD /* CoreData.framework */; };
 		2EFE2FA718E65374003CBAFD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2FA618E65374003CBAFD /* Parse.framework */; };
 /* End PBXBuildFile section */
@@ -53,12 +51,8 @@
 		2EFE2F8A18E65128003CBAFD /* CGSyncControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CGSyncControllerTests-Info.plist"; sourceTree = "<group>"; };
 		2EFE2F8C18E65128003CBAFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2EFE2F8E18E65128003CBAFD /* CGSyncControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGSyncControllerTests.m; sourceTree = "<group>"; };
-		2EFE2F9A18E65326003CBAFD /* CGManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGManagedObject.h; sourceTree = "<group>"; };
-		2EFE2F9B18E65326003CBAFD /* CGManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGManagedObject.m; sourceTree = "<group>"; };
 		2EFE2F9C18E65326003CBAFD /* CGSyncController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSyncController.h; sourceTree = "<group>"; };
 		2EFE2F9D18E65326003CBAFD /* CGSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSyncController.m; sourceTree = "<group>"; };
-		2EFE2F9E18E65326003CBAFD /* NSManagedObject+SYNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+SYNC.h"; sourceTree = "<group>"; };
-		2EFE2F9F18E65326003CBAFD /* NSManagedObject+SYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+SYNC.m"; sourceTree = "<group>"; };
 		2EFE2FA418E6535B003CBAFD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2EFE2FA618E65374003CBAFD /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../../../Documents/FacebookSDK/Parse.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,10 +118,6 @@
 			children = (
 				2EFE2F9C18E65326003CBAFD /* CGSyncController.h */,
 				2EFE2F9D18E65326003CBAFD /* CGSyncController.m */,
-				2EFE2F9A18E65326003CBAFD /* CGManagedObject.h */,
-				2EFE2F9B18E65326003CBAFD /* CGManagedObject.m */,
-				2EFE2F9E18E65326003CBAFD /* NSManagedObject+SYNC.h */,
-				2EFE2F9F18E65326003CBAFD /* NSManagedObject+SYNC.m */,
 				2EFE2F7518E65128003CBAFD /* Supporting Files */,
 			);
 			path = CGSyncController;
@@ -240,9 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EFE2FA118E65326003CBAFD /* CGManagedObject.m in Sources */,
 				2EFE2FA218E65326003CBAFD /* CGSyncController.m in Sources */,
-				2EFE2FA318E65326003CBAFD /* NSManagedObject+SYNC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
