@@ -258,7 +258,9 @@
 - (void)setObjectSync:(NSManagedObject *)obj andNotify:(BOOL)sync
 {
     NSManagedObjectContext *context = [[CGDataController sharedData] backgroundManagedObjectContext];
-    [obj setSyncing:[NSNumber numberWithBool:sync]];
+//    [obj setSyncing:[NSNumber numberWithBool:sync]];
+#warning Set correct Syncstatus
+    [obj setSyncStatus:[NSNumber numberWithInt:1]];
     [context performBlockAndWait:^{
         NSError *error = nil;
         if (![context save:&error]) {

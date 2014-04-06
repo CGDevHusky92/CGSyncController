@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E322AE818F207EC0005CF17 /* CGSyncController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EFE2F9C18E65326003CBAFD /* CGSyncController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EFE2F7318E65128003CBAFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F7218E65128003CBAFD /* Foundation.framework */; };
 		2EFE2F8118E65128003CBAFD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F8018E65128003CBAFD /* XCTest.framework */; };
 		2EFE2F8218E65128003CBAFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F7218E65128003CBAFD /* Foundation.framework */; };
@@ -151,6 +152,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		2E322AE718F207E50005CF17 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E322AE818F207EC0005CF17 /* CGSyncController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		2EFE2F6E18E65128003CBAFD /* CGSyncController */ = {
 			isa = PBXNativeTarget;
@@ -159,6 +171,7 @@
 				2EFE2F6B18E65128003CBAFD /* Sources */,
 				2EFE2F6C18E65128003CBAFD /* Frameworks */,
 				2EFE2F6D18E65128003CBAFD /* CopyFiles */,
+				2E322AE718F207E50005CF17 /* Headers */,
 			);
 			buildRules = (
 			);
