@@ -17,7 +17,6 @@
 		2EFE2F8F18E65128003CBAFD /* CGSyncControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F8E18E65128003CBAFD /* CGSyncControllerTests.m */; };
 		2EFE2FA218E65326003CBAFD /* CGSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE2F9D18E65326003CBAFD /* CGSyncController.m */; };
 		2EFE2FA518E6535B003CBAFD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2FA418E6535B003CBAFD /* CoreData.framework */; };
-		2EFE2FA718E65374003CBAFD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2FA618E65374003CBAFD /* Parse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +62,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EFE2FA718E65374003CBAFD /* Parse.framework in Frameworks */,
 				2EFE2FA518E6535B003CBAFD /* CoreData.framework in Frameworks */,
 				2EFE2F7318E65128003CBAFD /* Foundation.framework in Frameworks */,
 			);

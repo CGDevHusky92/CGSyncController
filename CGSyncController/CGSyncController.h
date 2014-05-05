@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Revision Works, LLC. All rights reserved.
 //
 
-#import <Parse/Parse.h>
 #import <Foundation/Foundation.h>
 #import "CGObject.h"
 #import "CGDataController.h"

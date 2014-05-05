@@ -7,13 +7,13 @@
 //
 
 #import <pthread.h>
-#import <Parse/Parse.h>
-//#import "ThisOrThatAppDelegate.h"
 #import "NSManagedObject+SYNC.h"
 
 #import "CGSyncController.h"
 #import "CGDataController.h"
 
+
+#warning Goal is to remove this imports completely with a completely generic sync...
 #import "User.h"
 #import "Decision.h"
 #import "Choice.h"
@@ -24,6 +24,8 @@
 #import "PFChoice.h"
 #import "PFFriend.h"
 
+
+
 #ifdef TAT_LOGGING
 #import "CGLogger.h"
 #endif
@@ -32,9 +34,12 @@
 
 @interface CGSyncController ()
 
+@property (nonatomic, strong) NSMutableArray *waitingQueue;
+
 @end
 
 @implementation CGSyncController
+@synthesize waitingQueue=_waitingQueue;
 
 + (instancetype)sharedSync
 {
@@ -46,13 +51,24 @@
     return sharedController;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _waitingQueue = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (void)startRefreshForClass:(NSString *)aClass
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (![self offline]) {
+            
+            
             if ([aClass isEqualToString:@"Decision"]) {
-                NSArray *decsToSync = [self decisionsForGroup:0];
-                [self genericSyncStageForClass:aClass andPreloadedObjects:decsToSync];
+//                NSArray *decsToSync = [self decisionsForGroup:0];
+//                [self genericSyncStageForClass:aClass andPreloadedObjects:decsToSync];
             } else {
                 [self genericSyncStageForClass:aClass];
             }
@@ -78,7 +94,7 @@
     if (objects) {
         external = objects;
     } else {
-        external = [self grabAllServerObjectsWithName:className orderAscendingByKey:@"createdAt"];
+//        external = [self grabAllServerObjectsWithName:className orderAscendingByKey:@"createdAt"];
     }
     
     NSArray *internal = [[CGDataController sharedData] managedObjsAsDictionariesForClass:className sortedByKey:@"createdAt" withBatchSize:20 ascending:YES];
@@ -177,6 +193,7 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSError *error = nil;
+        NSLog(@"Test For Class Name: %@", [intObj objectForKey:@"className"]);
         NSArray *objArray = [[CGDataController sharedData] managedObjectsForClass:[intObj objectForKey:@"parseClassName"] sortedByKey:@"createdAt" withPredicate:[NSPredicate predicateWithFormat:@"objectId like %@", [intObj objectForKey:@"objectId"]]];
         NSManagedObject *obj = [objArray objectAtIndex:0];
         [self setObjectSync:obj andNotify:YES];
@@ -235,24 +252,14 @@
             while (!choicesSynced) {
 #warning won't work because objIds won't exist yet... Just check relationship and go from there...
                 for (NSString *chcId in choiceIds) {
-                    if (![self objectExistsOnDisk:chcId]) {
-                        CGManagedObject *chcObj = [self retrieveObjectOnServer:chcId];
-                        [self saveNewObject:chcObj];
-                    }
+//                    if (![self objectExistsOnDisk:chcId]) {
+//                        CGManagedObject *chcObj = [self retrieveObjectOnServer:chcId];
+//                        [self saveNewObject:chcObj];
+//                    }
                 }
             }
         }
     }
-}
-
-- (BOOL)objectExistsOnDisk:(NSString *)objId
-{
-    return NO;
-}
-
-- (CGManagedObject *)retrieveObjectOnServer:(NSString *)objId
-{
-    return nil;
 }
 
 - (void)setObjectSync:(NSManagedObject *)obj andNotify:(BOOL)sync
@@ -267,142 +274,6 @@
             NSLog(@"Error Unable To Save Context: %@", [error localizedDescription]);
         }
     }];
-}
-
-#pragma mark - Grab server objects
-
-- (NSArray *)grabAllServerObjectsWithName:(NSString *)className
-{
-    return [self grabAllServerObjectsWithName:className orderAscendingByKey:nil];
-}
-
-- (NSArray *)grabAllServerObjectsWithName:(NSString *)className orderAscendingByKey:(NSString *)key
-{
-    return [self grabAllServerObjectsWithName:className orderedByKey:key ascending:YES];
-}
-
-- (NSArray *)grabAllServerObjectsWithName:(NSString *)className orderDescendingByKey:(NSString *)key
-{
-    return [self grabAllServerObjectsWithName:className orderedByKey:key ascending:NO];
-}
-
-- (NSArray *)grabAllServerObjectsWithName:(NSString *)className orderedByKey:(NSString *)key ascending:(BOOL)ascend
-{
-    if (!className) return nil;
-    
-    NSError *error = nil;
-    PFQuery *query = [PFQuery queryWithClassName:className];
-    query.limit = 1000;
-    
-    if (key) {
-        if (ascend) {
-            [query orderByAscending:key];
-        } else {
-            [query orderByDescending:key];
-        }
-    }
-    
-    NSArray *objects = [query findObjects:&error];
-    
-    if (error) {
-        NSLog(@"Error: %@", [error localizedDescription]);
-    }
-    
-    return objects;
-}
-
-#pragma mark - Custom Decision Grab Tools
-
-- (NSArray *)decisionsForGroup:(int)group
-{
-    NSError *error = nil;
-    
-    // 1
-    if ([PFUser currentUser]) {
-        PFQuery *rec = [PFQuery queryWithClassName:@"Decision"];
-        [rec whereKey:@"receiver" equalTo:[[PFUser currentUser] username]];
-        [rec orderByDescending:@"createdAt"];
-        rec.limit = 50;
-        NSArray *recObjs = [rec findObjects:&error];
-        if (error) {
-            NSLog(@"Error: %@", [error localizedDescription]);
-            return nil;
-        }
-        
-        // 2
-        PFQuery *sen = [PFQuery queryWithClassName:@"Decision"];
-        [sen whereKey:@"sender" equalTo:[[PFUser currentUser] username]];
-        [sen orderByDescending:@"createdAt"];
-        sen.limit = 1000;
-        NSArray *senObjs = [sen findObjects:&error];
-        if (error) {
-            NSLog(@"Error: %@", [error localizedDescription]);
-            return nil;
-        }
-        
-        // 3
-        // Unique array of objectIds
-        // Array of the unique objects
-        NSArray *senUniqueObjs = [self decisionsStripUniqueObjects:senObjs];
-        
-        // 4
-        // Combine Unique Array and Rec Array Sorted By "createdAt"
-        // Remove Anything after 50 items
-        NSArray *combinedArray = [self decisionsSortedArrayOfObjects:recObjs andObjects:senUniqueObjs withLimit:YES];
-        
-        // 5
-        // Iterate over remaining array and find objects contained in the unique array
-        // add those objects to separate array and call decisionsFinalSelfSenderGroup on there valueForKey:@"choices"
-        NSMutableArray *combMutable = [combinedArray mutableCopy];
-        [combMutable removeObjectsInArray:recObjs];
-        NSArray *finalUnique = [combMutable valueForKeyPath:@"choices"];
-        NSArray *totalSend = [self decisionsFinalSenderFromGatheredObjects:senObjs forKeys:finalUnique];
-        
-        // 6
-        // Recombine into single array
-        NSArray *ret = [self decisionsSortedArrayOfObjects:recObjs andObjects:totalSend withLimit:YES];
-        return ret;
-    }
-    
-    return nil;
-}
-
-- (NSArray *)decisionsStripUniqueObjects:(NSArray *)objects
-{
-    if (!objects) return nil;
-    NSMutableArray *ret = [[NSMutableArray alloc] init];
-    NSMutableArray *uniqueObjKeys = [[objects valueForKeyPath:@"@distinctUnionOfObjects.choices"] mutableCopy];
-    for (PFDecision *dec in objects) {
-        if ([uniqueObjKeys containsObject:[dec choices]]) {
-            [ret addObject:dec];
-            [uniqueObjKeys removeObject:[dec choices]];
-        }
-    }
-    return ret;
-}
-
-- (NSArray *)decisionsSortedArrayOfObjects:(NSArray *)objsOne andObjects:(NSArray *)objsTwo withLimit:(BOOL)limit
-{
-    if (!objsOne || !objsTwo) return nil;
-    NSMutableArray *ret = [objsOne mutableCopy];
-    ret = [[ret arrayByAddingObjectsFromArray:objsTwo] mutableCopy];
-    [ret sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:YES]]];
-    if (limit && [ret count] > DECISION_PULL_LIMIT) {
-        [ret removeObjectsInRange:NSMakeRange((DECISION_PULL_LIMIT), [ret count] - DECISION_PULL_LIMIT)];
-    }
-    return ret;
-}
-
-- (NSArray *)decisionsFinalSenderFromGatheredObjects:(NSArray *)objs forKeys:(NSArray *)objIds
-{
-    if (!objs || !objIds) return nil;
-    NSMutableArray *ret = [[NSMutableArray alloc] init];
-    for (PFDecision *dec in objs) {
-        if ([objIds containsObject:[dec choices]]) {
-            [ret addObject:dec];
-        }
-    }
-    return ret;
 }
 
 @end
