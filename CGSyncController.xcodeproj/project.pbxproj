@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		2ED05C19192FC81B0082B792 /* CGSyncUniversal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 2ED05C1A192FC81B0082B792 /* Build configuration list for PBXAggregateTarget "CGSyncUniversal" */;
+			buildPhases = (
+				2ED05C1D192FC8CE0082B792 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = CGSyncUniversal;
+			productName = CGSyncUniversal;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		2E322AE818F207EC0005CF17 /* CGSyncController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EFE2F9C18E65326003CBAFD /* CGSyncController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EFE2F7318E65128003CBAFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFE2F7218E65128003CBAFD /* Foundation.framework */; };
@@ -221,6 +235,7 @@
 			targets = (
 				2EFE2F6E18E65128003CBAFD /* CGSyncController */,
 				2EFE2F7E18E65128003CBAFD /* CGSyncControllerTests */,
+				2ED05C19192FC81B0082B792 /* CGSyncUniversal */,
 			);
 		};
 /* End PBXProject section */
@@ -235,6 +250,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2ED05C1D192FC8CE0082B792 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LIB_TARGET_NAME=\"CGSyncController\"\n\nif [ \"${ACTION}\" = \"clean\" ]\nthen\necho \"Cleaning Libraries...\"\ncd \"${PROJECT_DIR}\"\nxcodebuild -target \"$LIB_TARGET_NAME\" -configuration ${CONFIGURATION} -sdk iphoneos clean\nxcodebuild -target \"$LIB_TARGET_NAME\" -configuration ${CONFIGURATION} -sdk iphonesimulator clean\nfi\n\nif [ \"${ACTION}\" = \"build\" ]\nthen\necho \"Building Libraries\"\ncd \"${PROJECT_DIR}\"\nxcodebuild -target \"$LIB_TARGET_NAME\" -configuration ${CONFIGURATION} -sdk iphoneos\nxcodebuild -target \"$LIB_TARGET_NAME\" -configuration ${CONFIGURATION} -sdk iphonesimulator\n\n# Check that this is what your static libraries are called\nARM_FILES=\"${PROJECT_DIR}/build/${CONFIGURATION}-iphoneos/lib${LIB_TARGET_NAME}.a\"\nI386_FILES=\"${PROJECT_DIR}/build/${CONFIGURATION}-iphonesimulator/lib${LIB_TARGET_NAME}.a\"\n\nmkdir -p \"${PROJECT_DIR}/build/Universal\"\n\necho \"Creating library...\"\nlipo -create \"$ARM_FILES\" \"$I386_FILES\" -o \"${PROJECT_DIR}/build/${CONFIGURATION}-iphoneos/lib${PRODUCT_NAME}.a\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2EFE2F6B18E65128003CBAFD /* Sources */ = {
@@ -275,6 +306,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2ED05C1B192FC81B0082B792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = CGSyncController;
+			};
+			name = Debug;
+		};
+		2ED05C1C192FC81B0082B792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = CGSyncController;
+			};
+			name = Release;
+		};
 		2EFE2F9018E65128003CBAFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -306,9 +351,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Debug;
 		};
@@ -337,9 +383,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Release;
 		};
@@ -358,11 +405,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"../**",
 				);
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Debug;
 		};
@@ -381,11 +430,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"../**",
 				);
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Release;
 		};
@@ -428,6 +479,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2ED05C1A192FC81B0082B792 /* Build configuration list for PBXAggregateTarget "CGSyncUniversal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ED05C1B192FC81B0082B792 /* Debug */,
+				2ED05C1C192FC81B0082B792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		2EFE2F6A18E65127003CBAFD /* Build configuration list for PBXProject "CGSyncController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
