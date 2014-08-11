@@ -1,20 +1,58 @@
 //
-//  SyncController.h
-//  ThisOrThat
+//  CGSyncController.h
+//  REPO
 //
-//  Created by Chase Gorectke on 1/25/14.
-//  Copyright (c) 2014 Revision Works, LLC. All rights reserved.
+//  Created by Charles Gorectke on 7/25/14.
+//  Copyright (c) 2014 Jackson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "CGObject.h"
-#import "CGDataController.h"
 #import "CGConnectionController.h"
 
-@interface CGSyncController : CGObject
+// extern NSString * const kCGSyncControllerInitialCompleteKey;
+// extern NSString * const kCGSyncControllerSyncCompletedNotificationName;
 
-+ (instancetype)sharedSync;
+extern NSString * const kCGSyncControllerSyncStartedNotificationKey;
+extern NSString * const kCGSyncControllerSyncCompletedNotificationKey;
 
-- (void)startRefreshForClass:(NSString *)aClass;
+typedef NS_ENUM(NSInteger, CGSyncStatus) {
+    kCGStatusPending,
+    kCGStatusSynced,
+    kCGStatusDeleted
+};
+
+@protocol CGSyncControllerDelegate <NSObject>
+
+- (void)willStartSyncForClass:(NSString *)className;
+- (void)didStartSyncForClass:(NSString *)className;
+
+- (void)willFinishSyncForClass:(NSString *)className;
+- (void)didFinishSyncForClass:(NSString *)className;
+
+@end
+
+@interface CGSyncController : NSObject <CGConnectionDataDelegate>
+
+@property (weak, nonatomic) id<CGSyncControllerDelegate> delegate;
+@property (atomic, readonly) BOOL syncInProgress;
+
+#pragma mark - Class Methods
+
++ (CGSyncController *)sharedSync;
+
+#pragma mark - Object Methods
+
+- (void)registerClassForSync:(NSString *)className withURLParameter:(NSString *)parameter;
+- (NSString *)urlForRegisteredClass:(NSString *)className;
+
+#pragma mark - Sync Methods
+
+- (void)syncRegisteredClasses;
+- (void)syncClass:(NSString *)className;
+
+#pragma mark - Object Helper Methods
+
+- (NSDate *)dateUsingStringFromAPI:(NSString *)dateString;
+- (NSString *)dateStringForAPIUsingDate:(NSDate *)date;
 
 @end
