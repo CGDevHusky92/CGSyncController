@@ -10,9 +10,14 @@
 #import "CGSyncController.h"
 
 #import "CGDataController.h"
+
+#import "CGJSONParser.h"
 #import "NSManagedObject+SYNC.h"
 
+
 #import "Candidate.h"
+
+#define SYNC_PRINT_DEBUG    1
 
 NSString * const kCGSyncControllerSyncStartedNotificationKey = @"kCGSyncControllerSyncStartedNotificationKey";
 NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncControllerSyncCompletedNotificationKey";
@@ -85,193 +90,184 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
 
 - (void)syncRegisteredClasses
 {
-    
-}
-
-- (void)syncClass:(NSString *)className
-{
-    
-}
-
-//- (void)syncRegisteredClasses
-//{
-//    for (NSString * key in [_registeredClassesToSync allKeys]) {
-//        [[CGConnectionController sharedConnection] requestStatusOfObjectsWithType:[_registeredClassesToSync objectForKey:key]];
-//    }
-//}
-
-- (void)checkForNecessarySyncWithStatus:(NSDictionary *)status
-{
-    NSDictionary * typeStatus = [self statusDictionaryForType:[status objectForKey:@"type"]];
-    if ([[status objectForKey:@"lastUpdated"] compare:[typeStatus objectForKey:@"lastUpdated"]] != NSOrderedSame) {
-        NSString * typeKey = [status objectForKey:@"type"];
-        [[CGConnectionController sharedConnection] requestObjectsWithType:[_registeredClassesToSync objectForKey:typeKey] andLimit:0];
+    for (NSString * key in [_registeredClassesToSync allKeys]) {
+        NSLog(@"Checking If Sync Is Necessary For %@", key);
+        [self initSyncWithClass:key];
     }
 }
 
-
-
-- (NSDictionary *)statusDictionaryForType:(NSString *)type
+- (void)initSyncWithClass:(NSString *)className
 {
-    NSArray * objectsArray = [[CGDataController sharedData] managedObjsAsDictionariesForClass:type sortedByKey:@"updatedAt" withBatchSize:1 ascending:NO];
-    if (!objectsArray) {
-        return nil;
-    } else {
-        NSDictionary * obj = [objectsArray objectAtIndex:0];
-        
-#warning Get correct keys to return
-        NSDictionary * ret = [[NSDictionary alloc] initWithObjectsAndKeys:[obj objectForKey:@"updatedAt"], @"updatedAt", nil];
-        return ret;
-    }
-}
-
-- (void)syncObjectsOfType:(NSString *)type withObjects:(NSArray *)objects
-{
-    NSArray * cachedObjects = [[CGDataController sharedData] managedObjectsForClass:type sortedByKey:@"updatedAt"];
-    NSArray * longerArray = ([objects count] > [cachedObjects count]) ? objects : cachedObjects;
-    NSArray * shorterArray = ([objects count] > [cachedObjects count]) ? cachedObjects : objects;
-    
-    int shortOffset = 0;
-    
-    for (int i = 0; i < [longerArray count]; i++) {
-        
-        
-        NSDictionary * shortObj;
-        NSDictionary * longObj = [longerArray objectAtIndex:i];
-        
-        if ([shorterArray count] > i - shortOffset) {
-            shortObj = [shorterArray objectAtIndex:i - shortOffset];
-        
-            NSString * objLongId = [longObj objectForKey:@"objectId"];
-            NSString * objShortId = [shortObj objectForKey:@"objectId"];
-                
-            if ([objLongId isEqualToString:objShortId]) {
-                
-                NSDate * longDate = [longObj objectForKey:@"updatedAt"];
-                NSDate * shortDate = [shortObj objectForKey:@"updatedAt"];
-                
-                if ([longDate compare:shortDate] == NSOrderedAscending) {
-                    
-                    // update longObj with shortObj data and then sync or store longObj
-                    
-                } else if ([longDate compare:shortDate] == NSOrderedDescending) {
-                    
-                    // update shortObj with longObj data and then sync or store longObj
-                    
-                }
-                
+    // Status Check
+    [[CGConnectionController sharedConnection] requestStatusOfObjectsWithType:className andCompletion:^(NSDictionary * statusDic, NSError * error){
+        if (!error) {
+            NSDictionary * localStatus = [[CGDataController sharedData] statusDictionaryForClass:className];
+            
+            NSDate * serverDate, * localDate;
+            
+            if (![[statusDic objectForKey:@"lastUpdatedAt"] isEqualToString:@""]) {
+                NSLog(@"Server Date: %@", [statusDic objectForKey:@"lastUpdatedAt"]);
+                serverDate = [[CGDataController sharedData] dateUsingStringFromAPI:[statusDic objectForKey:@"lastUpdatedAt"]];
             } else {
-                
-                // Insert longObj into Data Store or Sync
-                shortOffset++;
-                
+                NSLog(@"Server has no recruiters");
             }
             
-        } else {
+            if (![[localStatus objectForKey:@"lastUpdatedAt"] isEqualToString:@""]) {
+                NSLog(@"Local Date: %@", [localStatus objectForKey:@"lastUpdatedAt"]);
+                localDate = [[CGDataController sharedData] dateUsingStringFromAPI:[localStatus objectForKey:@"lastUpdatedAt"]];
+            } else {
+                NSLog(@"Local cache has no recruiters");
+            }
             
-            // Insert longObj into Data Store or Sync
-            shortOffset++;
-                
+            if ((!serverDate && localDate) || (serverDate && !localDate) || [serverDate compare:localDate] != NSOrderedSame) {
+#warning Notify start of sync
+                NSLog(@"Firing Sync For %@", className);
+                [self syncWithClass:className];
+            } else {
+                NSLog(@"Server Date %@ ... Local Date %@", serverDate, localDate);
+                NSLog(@"Synchronization Is Not Needed For %@", className);
+            }
+            
+//            if ([[statusDic objectForKey:@"lastUpdatedAt"] isEqualToString:@""] || [[localStatus objectForKey:@"lastUpdatedAt"] isEqualToString:@""] || [serverDate compare:localDate] != NSOrderedSame) {
+//#warning Notify start of sync
+//                NSLog(@"Firing Sync For %@", className);
+//                [self syncWithClass:className];
+//            } else {
+//                NSLog(@"Synchronization Is Not Needed For %@", className);
+//            }
+        } else {
+#warning Throw Exception
         }
+    }];
+}
+
+- (void)syncWithClass:(NSString *)className
+{
+    [[CGConnectionController sharedConnection] requestObjectsWithType:className andCompletion:^(NSArray * serverObjects, NSError * error){
+        NSLog(@"Received Server Response");
+        if (!error) {
+            NSArray * cachedObjects = [[CGDataController sharedData] managedObjectsForClass:className sortedByKey:@"updatedAt" ascending:NO];
+            NSArray * longerArray = ([serverObjects count] > [cachedObjects count]) ? serverObjects : cachedObjects;
+            NSArray * shorterArray = ([serverObjects count] > [cachedObjects count]) ? cachedObjects : serverObjects;
+//            BOOL longerIsServer = ([serverObjects count] > [cachedObjects count]) ? YES : NO;
+            
+            NSLog(@"Determined Loop Counts And Offsets");
+            
+            int shortOffset = 0;
+            
+            for (int i = 0; i < [longerArray count]; i++) {
+                
+                NSDictionary * shortObj;
+                NSDictionary * longObj = [longerArray objectAtIndex:i];
+                
+                if ([shorterArray count] > i - shortOffset) {
+                    shortObj = [shorterArray objectAtIndex:i - shortOffset];
+                    
+                    NSString * objLongId = [longObj valueForKey:@"objectId"];
+                    NSString * objShortId = [shortObj valueForKey:@"objectId"];
+                    
+                    if ([objLongId isEqualToString:objShortId]) {
+                        
+                        NSDate * longDate = [longObj valueForKey:@"updatedAt"];
+                        NSDate * shortDate = [shortObj valueForKey:@"updatedAt"];
+                        
+                        if ([longDate compare:shortDate] == NSOrderedAscending) {
+                            
+                            // update longObj with shortObj data and then sync or store longObj
+                            
+                            [self handleUpdateForClassName:className withObject:shortObj];
+                            
+                        } else if ([longDate compare:shortDate] == NSOrderedDescending) {
+                            
+                            // update shortObj with longObj data and then sync or store longObj
+                            
+                            [self handleUpdateForClassName:className withObject:longObj];
+                            
+                        } else {
+                            
+                            NSLog(@"Item is in sync");
+                            
+                        }
+                        
+                    } else {
+                        
+                        [self handleUpdateForClassName:className withObject:longObj];
+                        shortOffset++;
+                        
+                    }
+                    
+                } else {
+                    
+                    [self handleUpdateForClassName:className withObject:shortObj];
+                    shortOffset++;
+                    
+                }
+            }
+            
+#warning Notify end of sync...post sync cycle
+        } else {
+#warning Throw Exception
+        }
+    }];
+}
+
+- (void)handleUpdateForClassName:(NSString *)className withObject:(id)object
+{
+    if ([object isKindOfClass:[NSDictionary class]]) {
+        // Save Server Object To Store
+        
+       
+        NSManagedObject * obj = [[CGDataController sharedData] managedObjectForClass:className withId:[object valueForKey:@"objectId"]];
+        if (obj) {
+            
+            NSLog(@"Updating Object And Saving To Store");
+            
+            [obj updateFromDictionary:object];
+            [[CGDataController sharedData] save];
+            
+        } else {
+            // Insert New Object Into Data Store And Fill In Data
+            
+            NSLog(@"Inserting Object And Saving To Store");
+            
+            NSManagedObject * newObj = [[CGDataController sharedData] newManagedObjectForClass:className];
+            NSManagedObject * testObj = [NSClassFromString(className) objectWithParser:object];
+            
+            NSLog(@"Test Object Is Actually - %@", testObj);
+            
+            if ([newObj updateFromDictionary:[testObj dictionaryFromObject]]) {
+                NSLog(@"That worked");
+            } else {
+                NSLog(@"That didn't work");
+            }
+            
+            [[CGDataController sharedData] save];
+            
+        }
+    } else {
+        // Sync Managed Object To Server
+#ifdef SYNC_PRINT_DEBUG
+        NSLog(@"Updating Object And Syncing To Server - %@", object);
+#endif
+        
+        [[CGConnectionController sharedConnection] syncObjectType:className withID:[object valueForKey:@"objectId"] andCompletion:^(NSError * error){
+            if (error) {
+#warning Throw Sync Error...Possibly cancel sync
+                
+                NSLog(@"Sync Error: %@", error);
+            } else {
+                #warning Individual items synced notification? with object type???
+            }
+        }];
     }
 }
 
-#pragma mark - CGConnection Data Protocol
-
-- (void)connection:(CGConnection *)connection didSyncObject:(NSDictionary *)object
+- (CGFloat)currentSyncProgress
 {
-    NSLog(@"Connection Successfully Synced Object");
+    return 0.0;
 }
 
-- (void)connection:(CGConnection *)connection didFailToSyncObject:(NSDictionary *)object withError:(NSError *)error
-{
-    NSLog(@"Connection Failed To Sync Object");
-    DLog(@"Error: %@", [error localizedDescription]);
-}
 
-- (void)connection:(CGConnection *)connection didDeleteObject:(NSDictionary *)object
-{
-    NSLog(@"Connection Successfully Deleted Object");
-}
-
-- (void)connection:(CGConnection *)connection didFailToDeleteObject:(NSDictionary *)object withError:(NSError *)error
-{
-    NSLog(@"Connection Failed To Delete Object");
-    DLog(@"Error: %@", [error localizedDescription]);
-}
-
-- (void)connection:(CGConnection *)connection didReceiveObject:(NSDictionary *)object
-{
-    NSLog(@"Connection Successfully Received Object");
-}
-
-- (void)connection:(CGConnection *)connection didFailToReceiveObjectWithError:(NSError *)error
-{
-    NSLog(@"Connection Failed To Receive Object");
-    DLog(@"Error: %@", [error localizedDescription]);
-}
-
-- (void)connection:(CGConnection *)connection didReceiveObjects:(NSArray *)objects
-{
-    NSLog(@"Connection Successfully Received Objects");
-}
-
-- (void)connection:(CGConnection *)connection didFailToReceiveObjectsWithError:(NSError *)error
-{
-    NSLog(@"Connection Failed To Receive Objects");
-    DLog(@"Error: %@", [error localizedDescription]);
-}
-
-- (void)connection:(CGConnection *)connection didReceiveStatusForType:(NSDictionary *)status
-{
-    NSLog(@"Connection Successfully Received Status");
-    [self checkForNecessarySyncWithStatus:status];
-}
-
-- (void)connection:(CGConnection *)connection didFailToReceiveStatusForObjectType:(NSString *)type withError:(NSError *)error
-{
-    NSLog(@"Connection Failed To Receive Status");
-    DLog(@"Error: %@", [error localizedDescription]);
-}
-
-- (void)connection:(CGConnection *)connection didReceiveCount:(NSUInteger)count forObjectType:(NSString *)type
-{
-    NSLog(@"Connection Successfully Received Count");
-}
-
-- (void)connection:(CGConnection *)connection didFailToReceiveCountForObjectType:(NSString *)type withError:(NSError *)error
-{
-    NSLog(@"Connection Failed To Receive Count");
-    DLog(@"Error: %@", [error localizedDescription]);
-}
-
-#pragma mark - Date Conversion Methods
-
-- (void)initializeDateFormatter {
-    if (!self.dateFormatter) {
-        self.dateFormatter = [[NSDateFormatter alloc] init];
-        [self.dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-        [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    }
-}
-
-- (NSDate *)dateUsingStringFromAPI:(NSString *)dateString {
-    [self initializeDateFormatter];
-    // NSDateFormatter does not like ISO 8601 so strip the milliseconds and timezone
-    dateString = [dateString substringWithRange:NSMakeRange(0, [dateString length]-5)];
-    return [self.dateFormatter dateFromString:dateString];
-}
-
-- (NSString *)dateStringForAPIUsingDate:(NSDate *)date {
-    [self initializeDateFormatter];
-    NSString *dateString = [self.dateFormatter stringFromDate:date];
-    // remove Z
-    dateString = [dateString substringWithRange:NSMakeRange(0, [dateString length]-1)];
-    // add milliseconds and put Z back on
-    dateString = [dateString stringByAppendingFormat:@".000Z"];
-    
-    return dateString;
-}
 
 #pragma mark - Dealloc Protocol
 

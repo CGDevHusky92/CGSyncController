@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, CGSyncStatus) {
 - (void)willStartSyncForClass:(NSString *)className;
 - (void)didStartSyncForClass:(NSString *)className;
 
+- (void)updateSyncCompletionWithPercentage:(CGFloat)percent forClass:(NSString *)className;
+
 - (void)willFinishSyncForClass:(NSString *)className;
 - (void)didFinishSyncForClass:(NSString *)className;
 
@@ -48,11 +50,8 @@ typedef NS_ENUM(NSInteger, CGSyncStatus) {
 #pragma mark - Sync Methods
 
 - (void)syncRegisteredClasses;
-- (void)syncClass:(NSString *)className;
+- (void)initSyncWithClass:(NSString *)className;
 
-#pragma mark - Object Helper Methods
-
-- (NSDate *)dateUsingStringFromAPI:(NSString *)dateString;
-- (NSString *)dateStringForAPIUsingDate:(NSDate *)date;
+- (CGFloat)currentSyncProgress;
 
 @end
