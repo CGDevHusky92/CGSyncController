@@ -6,16 +6,8 @@
 //  Copyright (c) 2014 Jackson. All rights reserved.
 //
 
-//#import <pthread/pthread.h>
 #import "CGSyncController.h"
-
-#import "CGDataController.h"
-
-#import "CGJSONParser.h"
-#import "NSManagedObject+SYNC.h"
-
-
-#import "Candidate.h"
+#import <CGDataController/CGDataController.h>
 
 #define SYNC_PRINT_DEBUG    1
 
@@ -31,7 +23,7 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
 //@property (atomic) int globalSyncCount;
 //@property (nonatomic) UIBackgroundTaskIdentifier mainCandidateTask;
 
-@property (nonatomic, strong) NSMutableDictionary *registeredClassesToSync;
+
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 //@property (nonatomic, strong) NSMutableArray *currentSyncQueue;
@@ -43,7 +35,6 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
 
 @implementation CGSyncController
 @synthesize syncInProgress=_syncInProgress;
-@synthesize registeredClassesToSync=_registeredClassesToSync;
 @synthesize dateFormatter=_dateFormatter;
 //@synthesize missing_lock=_missing_lock;
 
@@ -75,22 +66,23 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
 
 - (void)registerClassForSync:(NSString *)className withURLParameter:(NSString *)parameter
 {
-    if (!_registeredClassesToSync) _registeredClassesToSync = [[NSMutableDictionary alloc] init];
-    [_registeredClassesToSync setObject:parameter forKey:className];
+    [[CGConnectionController sharedConnection] registerClass:className withURLParameter:parameter];
 }
 
-- (NSString *)urlForRegisteredClass:(NSString *)className
-{
-    NSString * urlPath = [_registeredClassesToSync objectForKey:className];
-    if (!urlPath) {
-#warning throw Exception
-    }
-    return urlPath;
-}
+//- (NSString *)urlForRegisteredClass:(NSString *)className
+//{
+//    
+//    
+//    NSString * urlPath = [_registeredClassesToSync objectForKey:className];
+//    if (!urlPath) {
+//#warning throw Exception
+//    }
+//    return urlPath;
+//}
 
 - (void)syncRegisteredClasses
 {
-    for (NSString * key in [_registeredClassesToSync allKeys]) {
+    for (NSString * key in [[CGConnectionController sharedConnection] registeredClasses]) {
         NSLog(@"Checking If Sync Is Necessary For %@", key);
         [self initSyncWithClass:key];
     }
@@ -112,7 +104,10 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
                 NSLog(@"Server has no recruiters");
             }
             
-            if (![[localStatus objectForKey:@"lastUpdatedAt"] isEqualToString:@""]) {
+            
+            if ([[localStatus objectForKey:@"lastUpdatedAt"] isKindOfClass:[NSDate class]]) {
+                localDate = [localStatus objectForKey:@"lastUpdatedAt"];
+            } else if (![[localStatus objectForKey:@"lastUpdatedAt"] isEqualToString:@""]) {
                 NSLog(@"Local Date: %@", [localStatus objectForKey:@"lastUpdatedAt"]);
                 localDate = [[CGDataController sharedData] dateUsingStringFromAPI:[localStatus objectForKey:@"lastUpdatedAt"]];
             } else {
@@ -127,14 +122,6 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
                 NSLog(@"Server Date %@ ... Local Date %@", serverDate, localDate);
                 NSLog(@"Synchronization Is Not Needed For %@", className);
             }
-            
-//            if ([[statusDic objectForKey:@"lastUpdatedAt"] isEqualToString:@""] || [[localStatus objectForKey:@"lastUpdatedAt"] isEqualToString:@""] || [serverDate compare:localDate] != NSOrderedSame) {
-//#warning Notify start of sync
-//                NSLog(@"Firing Sync For %@", className);
-//                [self syncWithClass:className];
-//            } else {
-//                NSLog(@"Synchronization Is Not Needed For %@", className);
-//            }
         } else {
 #warning Throw Exception
         }
@@ -149,13 +136,12 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
             NSArray * cachedObjects = [[CGDataController sharedData] managedObjectsForClass:className sortedByKey:@"updatedAt" ascending:NO];
             NSArray * longerArray = ([serverObjects count] > [cachedObjects count]) ? serverObjects : cachedObjects;
             NSArray * shorterArray = ([serverObjects count] > [cachedObjects count]) ? cachedObjects : serverObjects;
-//            BOOL longerIsServer = ([serverObjects count] > [cachedObjects count]) ? YES : NO;
             
             NSLog(@"Determined Loop Counts And Offsets");
             
-            int shortOffset = 0;
+            int i = 0, shortOffset = 0;
             
-            for (int i = 0; i < [longerArray count]; i++) {
+            for (i = 0; i < [longerArray count]; i++) {
                 
                 NSDictionary * shortObj;
                 NSDictionary * longObj = [longerArray objectAtIndex:i];
@@ -168,18 +154,32 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
                     
                     if ([objLongId isEqualToString:objShortId]) {
                         
-                        NSDate * longDate = [longObj valueForKey:@"updatedAt"];
-                        NSDate * shortDate = [shortObj valueForKey:@"updatedAt"];
+                        NSDate * longDate, * shortDate;
+                        
+                        if ([[longObj valueForKey:@"updatedAt"] isKindOfClass:[NSDate class]]) {
+                            longDate = [longObj valueForKey:@"updatedAt"];
+                        } else {
+                            longDate = [[CGDataController sharedData] dateUsingStringFromAPI:[longObj valueForKey:@"updatedAt"]];
+                        }
+                        
+                        if ([[shortObj valueForKey:@"updatedAt"] isKindOfClass:[NSDate class]]) {
+                            shortDate = [shortObj valueForKey:@"updatedAt"];
+                        } else {
+                            shortDate = [[CGDataController sharedData] dateUsingStringFromAPI:[shortObj valueForKey:@"updatedAt"]];
+                        }
                         
                         if ([longDate compare:shortDate] == NSOrderedAscending) {
                             
                             // update longObj with shortObj data and then sync or store longObj
+                            NSLog(@"Update longObj");
                             
                             [self handleUpdateForClassName:className withObject:shortObj];
                             
                         } else if ([longDate compare:shortDate] == NSOrderedDescending) {
                             
                             // update shortObj with longObj data and then sync or store longObj
+                            NSLog(@"Update shortObj");
+                            
                             
                             [self handleUpdateForClassName:className withObject:longObj];
                             
@@ -190,6 +190,7 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
                         }
                         
                     } else {
+                        NSLog(@"Update 2 longObj");
                         
                         [self handleUpdateForClassName:className withObject:longObj];
                         shortOffset++;
@@ -197,11 +198,21 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
                     }
                     
                 } else {
+                    NSLog(@"Update 3 longObj");
                     
-                    [self handleUpdateForClassName:className withObject:shortObj];
+                    [self handleUpdateForClassName:className withObject:longObj];
                     shortOffset++;
                     
                 }
+            }
+            
+            while (i - shortOffset < [shorterArray count]) {
+                // Finish syncing shorter array
+                
+                NSLog(@"Update 2 shortObj");
+                
+                [self handleUpdateForClassName:className withObject:[shorterArray objectAtIndex:(i - shortOffset)]];
+                i++;
             }
             
 #warning Notify end of sync...post sync cycle
@@ -223,6 +234,7 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
             NSLog(@"Updating Object And Saving To Store");
             
             [obj updateFromDictionary:object];
+            
             [[CGDataController sharedData] save];
             
         } else {
@@ -231,15 +243,16 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
             NSLog(@"Inserting Object And Saving To Store");
             
             NSManagedObject * newObj = [[CGDataController sharedData] newManagedObjectForClass:className];
-            NSManagedObject * testObj = [NSClassFromString(className) objectWithParser:object];
             
-            NSLog(@"Test Object Is Actually - %@", testObj);
+            NSLog(@"Test Object Is Actually - %@", object);
             
-            if ([newObj updateFromDictionary:[testObj dictionaryFromObject]]) {
+            if ([newObj updateFromDictionary:object]) {
                 NSLog(@"That worked");
             } else {
                 NSLog(@"That didn't work");
             }
+            
+//            NSLog(@"Final Object - %@", newObj);
             
             [[CGDataController sharedData] save];
             
@@ -247,7 +260,8 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
     } else {
         // Sync Managed Object To Server
 #ifdef SYNC_PRINT_DEBUG
-        NSLog(@"Updating Object And Syncing To Server - %@", object);
+        NSLog(@"Error");
+//        NSLog(@"Updating Object And Syncing To Server - %@", object);
 #endif
         
         [[CGConnectionController sharedConnection] syncObjectType:className withID:[object valueForKey:@"objectId"] andCompletion:^(NSError * error){

@@ -6,8 +6,15 @@
 //  Copyright (c) 2014 Jackson. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "CGConnectionController.h"
+#import <CGConnectionController/CGConnectionController.h>
+
+//! Project version number for CGSyncController.
+FOUNDATION_EXPORT double CGSyncControllerVersionNumber;
+
+//! Project version string for CGSyncController.
+FOUNDATION_EXPORT const unsigned char CGSyncControllerVersionString[];
 
 // extern NSString * const kCGSyncControllerInitialCompleteKey;
 // extern NSString * const kCGSyncControllerSyncCompletedNotificationName;
@@ -45,7 +52,6 @@ typedef NS_ENUM(NSInteger, CGSyncStatus) {
 #pragma mark - Object Methods
 
 - (void)registerClassForSync:(NSString *)className withURLParameter:(NSString *)parameter;
-- (NSString *)urlForRegisteredClass:(NSString *)className;
 
 #pragma mark - Sync Methods
 
@@ -55,3 +61,8 @@ typedef NS_ENUM(NSInteger, CGSyncStatus) {
 - (CGFloat)currentSyncProgress;
 
 @end
+
+
+
+
+
