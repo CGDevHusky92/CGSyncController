@@ -7,120 +7,152 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D3198A0919D20EDD0003689D /* CGSyncDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = D3198A0819D20EDD0003689D /* CGSyncDefines.h */; };
-		D38D70F519D1F850005AFD68 /* CGSyncController.h in Headers */ = {isa = PBXBuildFile; fileRef = D38D70F419D1F850005AFD68 /* CGSyncController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D38D70FF19D1F851005AFD68 /* CGSyncControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D38D70FE19D1F851005AFD68 /* CGSyncControllerTests.m */; };
-		D38D710919D1F8D2005AFD68 /* CGSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38D710819D1F8D2005AFD68 /* CGSyncController.m */; };
+		D379DD441A13676C00A5E89C /* CGSyncController.h in Headers */ = {isa = PBXBuildFile; fileRef = D379DD431A13676C00A5E89C /* CGSyncController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D379DD511A13676C00A5E89C /* CGSyncControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D379DD501A13676C00A5E89C /* CGSyncControllerTests.m */; };
+		D379DD891A13697C00A5E89C /* CGSync-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = D379DD861A13697C00A5E89C /* CGSync-Prefix.pch */; };
+		D379DD8A1A13697C00A5E89C /* CGSyncController.m in Sources */ = {isa = PBXBuildFile; fileRef = D379DD871A13697C00A5E89C /* CGSyncController.m */; };
+		D379DD8B1A13697C00A5E89C /* CGSyncDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = D379DD881A13697C00A5E89C /* CGSyncDefines.h */; };
+		D379DD9C1A136B9D00A5E89C /* CGConnectionController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379DD9A1A136B9D00A5E89C /* CGConnectionController.framework */; };
+		D379DD9D1A136B9D00A5E89C /* CGDataController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379DD9B1A136B9D00A5E89C /* CGDataController.framework */; };
+		D379DDA81A13723400A5E89C /* CGConnectionController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379DD9A1A136B9D00A5E89C /* CGConnectionController.framework */; };
+		D379DDA91A13723400A5E89C /* CGDataController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D379DD9B1A136B9D00A5E89C /* CGDataController.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D379DD4B1A13676C00A5E89C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D379DD351A13676C00A5E89C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D379DD3D1A13676C00A5E89C;
+			remoteInfo = CGSyncController;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		D3198A0719D20E7A0003689D /* CGSync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CGSync-Prefix.pch"; sourceTree = "<group>"; };
-		D3198A0819D20EDD0003689D /* CGSyncDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSyncDefines.h; sourceTree = "<group>"; };
-		D38D70EF19D1F850005AFD68 /* CGSyncController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CGSyncController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D38D70F319D1F850005AFD68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D38D70F419D1F850005AFD68 /* CGSyncController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGSyncController.h; sourceTree = "<group>"; };
-		D38D70FA19D1F851005AFD68 /* CGSyncControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CGSyncControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D38D70FD19D1F851005AFD68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D38D70FE19D1F851005AFD68 /* CGSyncControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGSyncControllerTests.m; sourceTree = "<group>"; };
-		D38D710819D1F8D2005AFD68 /* CGSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSyncController.m; sourceTree = "<group>"; };
+		D379DD3E1A13676C00A5E89C /* CGSyncController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CGSyncController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D379DD421A13676C00A5E89C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D379DD431A13676C00A5E89C /* CGSyncController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGSyncController.h; sourceTree = "<group>"; };
+		D379DD491A13676C00A5E89C /* CGSyncControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CGSyncControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D379DD4F1A13676C00A5E89C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D379DD501A13676C00A5E89C /* CGSyncControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGSyncControllerTests.m; sourceTree = "<group>"; };
+		D379DD861A13697C00A5E89C /* CGSync-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGSync-Prefix.pch"; sourceTree = "<group>"; };
+		D379DD871A13697C00A5E89C /* CGSyncController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGSyncController.m; sourceTree = "<group>"; };
+		D379DD881A13697C00A5E89C /* CGSyncDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSyncDefines.h; sourceTree = "<group>"; };
+		D379DD9A1A136B9D00A5E89C /* CGConnectionController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGConnectionController.framework; path = "../../../../Library/Developer/Xcode/DerivedData/REPO-grqvcnwdfcjkedgovckmxjsszsvy/Build/Products/Debug-iphoneos/CGConnectionController.framework"; sourceTree = "<group>"; };
+		D379DD9B1A136B9D00A5E89C /* CGDataController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CGDataController.framework; path = "../../../../Library/Developer/Xcode/DerivedData/REPO-grqvcnwdfcjkedgovckmxjsszsvy/Build/Products/Debug-iphoneos/CGDataController.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D38D70EB19D1F850005AFD68 /* Frameworks */ = {
+		D379DD3A1A13676C00A5E89C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D379DDA81A13723400A5E89C /* CGConnectionController.framework in Frameworks */,
+				D379DDA91A13723400A5E89C /* CGDataController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38D70F719D1F851005AFD68 /* Frameworks */ = {
+		D379DD461A13676C00A5E89C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D379DD9C1A136B9D00A5E89C /* CGConnectionController.framework in Frameworks */,
+				D379DD9D1A136B9D00A5E89C /* CGDataController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D38D70E519D1F850005AFD68 = {
+		D379DD341A13676C00A5E89C = {
 			isa = PBXGroup;
 			children = (
-				D38D70F119D1F850005AFD68 /* CGSyncController */,
-				D38D70FB19D1F851005AFD68 /* CGSyncControllerTests */,
-				D38D70F019D1F850005AFD68 /* Products */,
+				D379DD401A13676C00A5E89C /* CGSyncController */,
+				D379DD4D1A13676C00A5E89C /* CGSyncControllerTests */,
+				D379DDA01A136DC900A5E89C /* Frameworks */,
+				D379DD3F1A13676C00A5E89C /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D38D70F019D1F850005AFD68 /* Products */ = {
+		D379DD3F1A13676C00A5E89C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D38D70EF19D1F850005AFD68 /* CGSyncController.framework */,
-				D38D70FA19D1F851005AFD68 /* CGSyncControllerTests.xctest */,
+				D379DD3E1A13676C00A5E89C /* CGSyncController.framework */,
+				D379DD491A13676C00A5E89C /* CGSyncControllerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D38D70F119D1F850005AFD68 /* CGSyncController */ = {
+		D379DD401A13676C00A5E89C /* CGSyncController */ = {
 			isa = PBXGroup;
 			children = (
-				D38D70F419D1F850005AFD68 /* CGSyncController.h */,
-				D38D710819D1F8D2005AFD68 /* CGSyncController.m */,
-				D38D70F219D1F850005AFD68 /* Supporting Files */,
+				D379DD431A13676C00A5E89C /* CGSyncController.h */,
+				D379DD871A13697C00A5E89C /* CGSyncController.m */,
+				D379DD411A13676C00A5E89C /* Supporting Files */,
 			);
 			path = CGSyncController;
 			sourceTree = "<group>";
 		};
-		D38D70F219D1F850005AFD68 /* Supporting Files */ = {
+		D379DD411A13676C00A5E89C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D38D70F319D1F850005AFD68 /* Info.plist */,
-				D3198A0719D20E7A0003689D /* CGSync-Prefix.pch */,
-				D3198A0819D20EDD0003689D /* CGSyncDefines.h */,
+				D379DD881A13697C00A5E89C /* CGSyncDefines.h */,
+				D379DD861A13697C00A5E89C /* CGSync-Prefix.pch */,
+				D379DD421A13676C00A5E89C /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D38D70FB19D1F851005AFD68 /* CGSyncControllerTests */ = {
+		D379DD4D1A13676C00A5E89C /* CGSyncControllerTests */ = {
 			isa = PBXGroup;
 			children = (
-				D38D70FE19D1F851005AFD68 /* CGSyncControllerTests.m */,
-				D38D70FC19D1F851005AFD68 /* Supporting Files */,
+				D379DD501A13676C00A5E89C /* CGSyncControllerTests.m */,
+				D379DD4E1A13676C00A5E89C /* Supporting Files */,
 			);
 			path = CGSyncControllerTests;
 			sourceTree = "<group>";
 		};
-		D38D70FC19D1F851005AFD68 /* Supporting Files */ = {
+		D379DD4E1A13676C00A5E89C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D38D70FD19D1F851005AFD68 /* Info.plist */,
+				D379DD4F1A13676C00A5E89C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D379DDA01A136DC900A5E89C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D379DD9A1A136B9D00A5E89C /* CGConnectionController.framework */,
+				D379DD9B1A136B9D00A5E89C /* CGDataController.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D38D70EC19D1F850005AFD68 /* Headers */ = {
+		D379DD3B1A13676C00A5E89C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3198A0919D20EDD0003689D /* CGSyncDefines.h in Headers */,
-				D38D70F519D1F850005AFD68 /* CGSyncController.h in Headers */,
+				D379DD891A13697C00A5E89C /* CGSync-Prefix.pch in Headers */,
+				D379DD441A13676C00A5E89C /* CGSyncController.h in Headers */,
+				D379DD8B1A13697C00A5E89C /* CGSyncDefines.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D38D70EE19D1F850005AFD68 /* CGSyncController */ = {
+		D379DD3D1A13676C00A5E89C /* CGSyncController */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D38D710219D1F851005AFD68 /* Build configuration list for PBXNativeTarget "CGSyncController" */;
+			buildConfigurationList = D379DD541A13676C00A5E89C /* Build configuration list for PBXNativeTarget "CGSyncController" */;
 			buildPhases = (
-				D38D70EA19D1F850005AFD68 /* Sources */,
-				D38D70EB19D1F850005AFD68 /* Frameworks */,
-				D38D70EC19D1F850005AFD68 /* Headers */,
-				D38D70ED19D1F850005AFD68 /* Resources */,
+				D379DD391A13676C00A5E89C /* Sources */,
+				D379DD3A1A13676C00A5E89C /* Frameworks */,
+				D379DD3B1A13676C00A5E89C /* Headers */,
+				D379DD3C1A13676C00A5E89C /* Resources */,
 			);
 			buildRules = (
 			);
@@ -128,70 +160,72 @@
 			);
 			name = CGSyncController;
 			productName = CGSyncController;
-			productReference = D38D70EF19D1F850005AFD68 /* CGSyncController.framework */;
+			productReference = D379DD3E1A13676C00A5E89C /* CGSyncController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D38D70F919D1F851005AFD68 /* CGSyncControllerTests */ = {
+		D379DD481A13676C00A5E89C /* CGSyncControllerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D38D710519D1F851005AFD68 /* Build configuration list for PBXNativeTarget "CGSyncControllerTests" */;
+			buildConfigurationList = D379DD571A13676C00A5E89C /* Build configuration list for PBXNativeTarget "CGSyncControllerTests" */;
 			buildPhases = (
-				D38D70F619D1F851005AFD68 /* Sources */,
-				D38D70F719D1F851005AFD68 /* Frameworks */,
-				D38D70F819D1F851005AFD68 /* Resources */,
+				D379DD451A13676C00A5E89C /* Sources */,
+				D379DD461A13676C00A5E89C /* Frameworks */,
+				D379DD471A13676C00A5E89C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D379DD4C1A13676C00A5E89C /* PBXTargetDependency */,
 			);
 			name = CGSyncControllerTests;
 			productName = CGSyncControllerTests;
-			productReference = D38D70FA19D1F851005AFD68 /* CGSyncControllerTests.xctest */;
+			productReference = D379DD491A13676C00A5E89C /* CGSyncControllerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D38D70E619D1F850005AFD68 /* Project object */ = {
+		D379DD351A13676C00A5E89C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Revision Works, LLC";
 				TargetAttributes = {
-					D38D70EE19D1F850005AFD68 = {
-						CreatedOnToolsVersion = 6.0;
+					D379DD3D1A13676C00A5E89C = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 32475EWY46;
 					};
-					D38D70F919D1F851005AFD68 = {
-						CreatedOnToolsVersion = 6.0;
+					D379DD481A13676C00A5E89C = {
+						CreatedOnToolsVersion = 6.1;
 					};
 				};
 			};
-			buildConfigurationList = D38D70E919D1F850005AFD68 /* Build configuration list for PBXProject "CGSyncController" */;
+			buildConfigurationList = D379DD381A13676C00A5E89C /* Build configuration list for PBXProject "CGSyncController" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = D38D70E519D1F850005AFD68;
-			productRefGroup = D38D70F019D1F850005AFD68 /* Products */;
+			mainGroup = D379DD341A13676C00A5E89C;
+			productRefGroup = D379DD3F1A13676C00A5E89C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D38D70EE19D1F850005AFD68 /* CGSyncController */,
-				D38D70F919D1F851005AFD68 /* CGSyncControllerTests */,
+				D379DD3D1A13676C00A5E89C /* CGSyncController */,
+				D379DD481A13676C00A5E89C /* CGSyncControllerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D38D70ED19D1F850005AFD68 /* Resources */ = {
+		D379DD3C1A13676C00A5E89C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38D70F819D1F851005AFD68 /* Resources */ = {
+		D379DD471A13676C00A5E89C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -201,26 +235,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D38D70EA19D1F850005AFD68 /* Sources */ = {
+		D379DD391A13676C00A5E89C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38D710919D1F8D2005AFD68 /* CGSyncController.m in Sources */,
+				D379DD8A1A13697C00A5E89C /* CGSyncController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D38D70F619D1F851005AFD68 /* Sources */ = {
+		D379DD451A13676C00A5E89C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D38D70FF19D1F851005AFD68 /* CGSyncControllerTests.m in Sources */,
+				D379DD511A13676C00A5E89C /* CGSyncControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D379DD4C1A13676C00A5E89C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D379DD3D1A13676C00A5E89C /* CGSyncController */;
+			targetProxy = D379DD4B1A13676C00A5E89C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		D38D710019D1F851005AFD68 /* Debug */ = {
+		D379DD521A13676C00A5E89C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -255,7 +297,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -265,7 +307,7 @@
 			};
 			name = Debug;
 		};
-		D38D710119D1F851005AFD68 /* Release */ = {
+		D379DD531A13676C00A5E89C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -294,7 +336,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -304,56 +346,60 @@
 			};
 			name = Release;
 		};
-		D38D710319D1F851005AFD68 /* Debug */ = {
+		D379DD551A13676C00A5E89C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkl0313/Desktop/RecruitmentApp/REPO/CGDataController/build/Debug-iphoneos",
-					"/Users/tkl0313/Desktop/RecruitmentApp/REPO/CGConnectionController/build/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/REPO-grqvcnwdfcjkedgovckmxjsszsvy/Build/Products/Debug-iphoneos",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CGSyncController/CGSync-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/CGSyncController/CGSync-Prefix.pch";
 				INFOPLIST_FILE = CGSyncController/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E54BC92A-0C3B-4B36-ACBB-325DB02B497C";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		D38D710419D1F851005AFD68 /* Release */ = {
+		D379DD561A13676C00A5E89C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/tkl0313/Desktop/RecruitmentApp/REPO/CGDataController/build/Debug-iphoneos",
-					"/Users/tkl0313/Desktop/RecruitmentApp/REPO/CGConnectionController/build/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/REPO-grqvcnwdfcjkedgovckmxjsszsvy/Build/Products/Debug-iphoneos",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CGSyncController/CGSync-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/CGSyncController/CGSync-Prefix.pch";
 				INFOPLIST_FILE = CGSyncController/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E54BC92A-0C3B-4B36-ACBB-325DB02B497C";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		D38D710619D1F851005AFD68 /* Debug */ = {
+		D379DD581A13676C00A5E89C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/REPO-grqvcnwdfcjkedgovckmxjsszsvy/Build/Products/Debug-iphoneos",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -362,53 +408,55 @@
 				INFOPLIST_FILE = CGSyncControllerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E54BC92A-0C3B-4B36-ACBB-325DB02B497C";
 			};
 			name = Debug;
 		};
-		D38D710719D1F851005AFD68 /* Release */ = {
+		D379DD591A13676C00A5E89C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/REPO-grqvcnwdfcjkedgovckmxjsszsvy/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = CGSyncControllerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E54BC92A-0C3B-4B36-ACBB-325DB02B497C";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D38D70E919D1F850005AFD68 /* Build configuration list for PBXProject "CGSyncController" */ = {
+		D379DD381A13676C00A5E89C /* Build configuration list for PBXProject "CGSyncController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38D710019D1F851005AFD68 /* Debug */,
-				D38D710119D1F851005AFD68 /* Release */,
+				D379DD521A13676C00A5E89C /* Debug */,
+				D379DD531A13676C00A5E89C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D38D710219D1F851005AFD68 /* Build configuration list for PBXNativeTarget "CGSyncController" */ = {
+		D379DD541A13676C00A5E89C /* Build configuration list for PBXNativeTarget "CGSyncController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38D710319D1F851005AFD68 /* Debug */,
-				D38D710419D1F851005AFD68 /* Release */,
+				D379DD551A13676C00A5E89C /* Debug */,
+				D379DD561A13676C00A5E89C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		D38D710519D1F851005AFD68 /* Build configuration list for PBXNativeTarget "CGSyncControllerTests" */ = {
+		D379DD571A13676C00A5E89C /* Build configuration list for PBXNativeTarget "CGSyncControllerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D38D710619D1F851005AFD68 /* Debug */,
-				D38D710719D1F851005AFD68 /* Release */,
+				D379DD581A13676C00A5E89C /* Debug */,
+				D379DD591A13676C00A5E89C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D38D70E619D1F850005AFD68 /* Project object */;
+	rootObject = D379DD351A13676C00A5E89C /* Project object */;
 }
