@@ -7,7 +7,9 @@
 //
 
 #import "CGSyncController.h"
+
 #import <CGDataController/CGDataController.h>
+#import <CGSubExtender/CGSubExtender.h>
 
 #define SYNC_PRINT_DEBUG    1
 
@@ -99,7 +101,7 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
             
             if (![[statusDic objectForKey:@"lastUpdatedAt"] isEqualToString:@""]) {
                 NSLog(@"Server Date: %@", [statusDic objectForKey:@"lastUpdatedAt"]);
-                serverDate = [[CGDataController sharedData] dateUsingStringFromAPI:[statusDic objectForKey:@"lastUpdatedAt"]];
+                serverDate = [[NSDate alloc] initWithString:[statusDic objectForKey:@"lastUpdatedAt"]];
             } else {
                 NSLog(@"Server has no recruiters");
             }
@@ -109,7 +111,7 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
                 localDate = [localStatus objectForKey:@"lastUpdatedAt"];
             } else if (![[localStatus objectForKey:@"lastUpdatedAt"] isEqualToString:@""]) {
                 NSLog(@"Local Date: %@", [localStatus objectForKey:@"lastUpdatedAt"]);
-                localDate = [[CGDataController sharedData] dateUsingStringFromAPI:[localStatus objectForKey:@"lastUpdatedAt"]];
+                localDate = [[NSDate alloc] initWithString:[localStatus objectForKey:@"lastUpdatedAt"]];
             } else {
                 NSLog(@"Local cache has no recruiters");
             }
@@ -133,7 +135,7 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
     [[CGConnectionController sharedConnection] requestObjectsWithType:className andCompletion:^(NSArray * serverObjects, NSError * error){
         NSLog(@"Received Server Response");
         if (!error) {
-            NSArray * cachedObjects = [[CGDataController sharedData] managedObjectsForClass:className sortedByKey:@"updatedAt" ascending:NO];
+            NSArray * cachedObjects = [[CGDataController sharedData] managedObjectsForClass:className sortedByKey:@"updatedAt" ascending:NO withFetchLimit:0 withBatchSize:0 withPredicate:nil];
             NSArray * longerArray = ([serverObjects count] > [cachedObjects count]) ? serverObjects : cachedObjects;
             NSArray * shorterArray = ([serverObjects count] > [cachedObjects count]) ? cachedObjects : serverObjects;
             
@@ -159,13 +161,13 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
                         if ([[longObj valueForKey:@"updatedAt"] isKindOfClass:[NSDate class]]) {
                             longDate = [longObj valueForKey:@"updatedAt"];
                         } else {
-                            longDate = [[CGDataController sharedData] dateUsingStringFromAPI:[longObj valueForKey:@"updatedAt"]];
+                            longDate = [[NSDate alloc] initWithString:[longObj valueForKey:@"updatedAt"]];
                         }
                         
                         if ([[shortObj valueForKey:@"updatedAt"] isKindOfClass:[NSDate class]]) {
                             shortDate = [shortObj valueForKey:@"updatedAt"];
                         } else {
-                            shortDate = [[CGDataController sharedData] dateUsingStringFromAPI:[shortObj valueForKey:@"updatedAt"]];
+                            shortDate = [[NSDate alloc] initWithString:[shortObj valueForKey:@"updatedAt"]];
                         }
                         
                         if ([longDate compare:shortDate] == NSOrderedAscending) {
