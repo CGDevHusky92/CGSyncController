@@ -230,12 +230,12 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
         // Save Server Object To Store
         
        
-        NSManagedObject * obj = [[CGDataController sharedData] managedObjectForClass:className withId:[object valueForKey:@"objectId"]];
+        CGManagedObject * obj = [[CGDataController sharedData] managedObjectForClass:className withId:[object valueForKey:@"objectId"]];
         if (obj) {
             
             NSLog(@"Updating Object And Saving To Store");
             
-            [obj updateFromDictionary:object];
+            //[obj updateFromDictionary:object];
             
             [[CGDataController sharedData] save];
             
@@ -244,15 +244,15 @@ NSString * const kCGSyncControllerSyncCompletedNotificationKey = @"kCGSyncContro
             
             NSLog(@"Inserting Object And Saving To Store");
             
-            NSManagedObject * newObj = [[CGDataController sharedData] newManagedObjectForClass:className];
+            CGManagedObject * newObj = [[CGDataController sharedData] newManagedObjectForClass:className];
             
             NSLog(@"Test Object Is Actually - %@", object);
             
-            if ([newObj updateFromDictionary:object]) {
-                NSLog(@"That worked");
-            } else {
-                NSLog(@"That didn't work");
-            }
+//            if ([newObj updateFromDictionary:object]) {
+//                NSLog(@"That worked");
+//            } else {
+//                NSLog(@"That didn't work");
+//            }
             
 //            NSLog(@"Final Object - %@", newObj);
             
